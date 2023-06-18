@@ -1,10 +1,13 @@
+//追加
+import PropTypes from 'prop-types';
+
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import axios from "axios";
-import { Header } from "../components/Header";
-import { url } from "../const";
-import "./home.css";
+import { url } from "../const";import { Header } from "../components/Header";
+
+import "./home.scss";
 
 
 export const Home = () => {
@@ -107,6 +110,14 @@ export const Home = () => {
   )
 }
 
+//追加
+Home.propTypes = {
+    tasks: PropTypes.array.isRequired,
+    selectListId: PropTypes.number.isRequired,
+    isDoneDisplay: PropTypes.bool.isRequired,
+};
+
+
 // 表示するタスク
 const Tasks = (props) => {
   const { tasks, selectListId, isDoneDisplay } = props;
@@ -122,6 +133,9 @@ const Tasks = (props) => {
           <li key={key} className="task-item">
             <Link to={`/lists/${selectListId}/tasks/${task.id}`} className="task-item-link">
               {task.title}<br />
+              
+              {task.limit}<br />
+              
               {task.done ? "完了" : "未完了"}
             </Link>
           </li>
@@ -139,10 +153,20 @@ const Tasks = (props) => {
         <li key={key} className="task-item">
           <Link to={`/lists/${selectListId}/tasks/${task.id}`} className="task-item-link">
             {task.title}<br />
-            {task.done ? "完了" : "未完了"}
+             {task.done ? "完了" : "未完了"} <br />
+
           </Link>
         </li>
       ))}
     </ul>
   )
 }
+//追加
+Tasks.propTypes = {
+    tasks: PropTypes.array.isRequired,
+    selectListId: PropTypes.number.isRequired,
+    isDoneDisplay: PropTypes.string.isRequired
+};
+
+
+export default Tasks;

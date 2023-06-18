@@ -4,7 +4,7 @@ import axios from "axios";
 import { useCookies } from "react-cookie";
 import { url } from "../const";
 import { useHistory, useParams } from "react-router-dom";
-import "./editTask.css"
+import "./editTask.scss"
 
 export const EditTask = () => {
   const history = useHistory();
@@ -13,16 +13,21 @@ export const EditTask = () => {
   const [title, setTitle] = useState("");
   const [detail, setDetail] = useState("");
   const [isDone, setIsDone] = useState();
+
+
   const [errorMessage, setErrorMessage] = useState("");
   const handleTitleChange = (e) => setTitle(e.target.value);
   const handleDetailChange = (e) => setDetail(e.target.value);
   const handleIsDoneChange = (e) => setIsDone(e.target.value === "done");
+
+
+
   const onUpdateTask = () => {
     console.log(isDone)
     const data = {
       title: title,
       detail: detail,
-      done: isDone
+      done: isDone,
     }
 
     axios.put(`${url}/lists/${listId}/tasks/${taskId}`, data, {
@@ -64,6 +69,8 @@ export const EditTask = () => {
       setTitle(task.title)
       setDetail(task.detail)
       setIsDone(task.done)
+
+   
     })
     .catch((err) => {
       setErrorMessage(`タスク情報の取得に失敗しました。${err}`);
@@ -79,6 +86,7 @@ export const EditTask = () => {
         <form className="edit-task-form">
           <label>タイトル</label><br />
           <input type="text" onChange={handleTitleChange} className="edit-task-title" value={title} /><br />
+
           <label>詳細</label><br />
           <textarea type="text" onChange={handleDetailChange} className="edit-task-detail" value={detail} /><br />
           <div>
