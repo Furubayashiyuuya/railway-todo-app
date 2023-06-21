@@ -24,7 +24,7 @@ export const NewList = () => {
         },
       })
       .then(() => {
-        history('/')
+        history.push('/')
       })
       .catch((err) => {
         setErrorMessage(`リストの作成に失敗しました。${err}`)

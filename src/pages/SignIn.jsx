@@ -24,14 +24,14 @@ export const SignIn = () => {
       .then((res) => {
         setCookie('token', res.data.token)
         dispatch(signIn())
-        history('/')
+        history.push('/')
       })
       .catch((err) => {
         setErrorMessage(`サインインに失敗しました。${err}`)
       })
   }
 
-  if (auth) return <Route element={<Navigate to="/" />} />
+  if (auth) return <Navigate to="/" />
 
   return (
     <div>
