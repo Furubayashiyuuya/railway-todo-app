@@ -31,3 +31,21 @@
 .error-message {
   color: #ff3333;
 }
+
+@media screen and (max-width: 320px) {
+  .new-task {
+    width: 150px;
+    margin-left: 0;
+    font-size: 13px;
+  }
+  .new-task-select-list,
+  .new-task-detail,
+  .new-task-title {
+    width: 130px;
+  }
+}
+@media screen and (max-width: 768px) and (min-width: 321px) {
+  .new-task {
+    width: 750px;
+  }
+}

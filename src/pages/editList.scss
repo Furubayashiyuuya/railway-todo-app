@@ -8,7 +8,6 @@
 .edit-list-form {
   color: #555555;
 }
-
 .edit-list-title {
   width: 300px;
   margin-bottom: 25px;
@@ -33,4 +32,18 @@
 
 .error-message {
   color: #ff3333;
+}
+@media screen and (max-width: 320px) {
+  .edit-list {
+    width: 150px;
+    margin-left: 0px;
+  }
+  .edit-list-title {
+    width: 130px;
+  }
+}
+@media screen and (max-width: 768px) and (min-width: 321px) {
+  .edit-list {
+    width: 750px;
+  }
 }

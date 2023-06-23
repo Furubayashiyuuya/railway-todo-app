@@ -29,3 +29,12 @@
 .error-message {
   color: #ff3333;
 }
+@media screen and (max-width: 320px) {
+  .signup {
+    width: 150px;
+    margin-left: 0;
+  }
+  .signup-form {
+    width: 130px;
+  }
+}

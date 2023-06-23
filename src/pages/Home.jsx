@@ -18,6 +18,7 @@ export const Home = () => {
   const [errorMessage, setErrorMessage] = useState('')
   const [cookies] = useCookies()
   const handleIsDoneDisplayChange = (e) => setIsDoneDisplay(e.target.value)
+
   useEffect(() => {
     axios
       .get(`${url}/lists`, {
@@ -67,7 +68,19 @@ export const Home = () => {
         setErrorMessage(`タスクの取得に失敗しました。${err}`)
       })
   }
-
+  const keymove = (e) => {
+    if (e.key === 'ArrowUp') {
+      const moveIndex = lists.findIndex((list) => list.id === selectListId)
+      const previousIndex = (moveIndex - 1 + lists.length) % lists.length
+      const previousId = lists[previousIndex].id
+      handleSelectList(previousId)
+    } else if (e.key === 'ArrowDown') {
+      const moveIndex = lists.findIndex((list) => list.id === selectListId)
+      const nextIndex = (moveIndex + 1) % lists.length
+      const nextId = lists[nextIndex].id
+      handleSelectList(nextId)
+    }
+  }
   return (
     <div>
       <Header />
@@ -92,6 +105,8 @@ export const Home = () => {
               const isActive = list.id === selectListId
               return (
                 <li
+                  onKeyDown={keymove}
+                  tabIndex={0}
                   key={key}
                   className={`list-tab-item ${isActive ? 'active' : ''}`}
                   onClick={() => handleSelectList(list.id)}
@@ -111,9 +126,7 @@ export const Home = () => {
                 onChange={handleIsDoneDisplayChange}
                 className="display-select"
               >
-                <option value="todo" tabIndex={0}>
-                  未完了
-                </option>
+                <option value="todo">未完了</option>
                 <option value="done">完了</option>
               </select>
             </div>
